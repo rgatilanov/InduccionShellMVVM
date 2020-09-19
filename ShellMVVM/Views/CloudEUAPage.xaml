@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ShellMVVM.Controls"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:views="clr-namespace:ShellMVVM.Views"
+             x:Class="ShellMVVM.Views.CloudEUAPage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+
+    <Shell.SearchHandler>
+        <controls:CloudSearchHandler Placeholder="Enter search term"
+                                      ShowsResults="true"
+                                      ItemTemplate="{StaticResource CloudSearchTemplate}"
+                                      SelectedItemNavigationTarget="{x:Type views:CloudEUADetailPage}" />
+    </Shell.SearchHandler>
+
+
+    <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected"
+                ItemTemplate="{StaticResource CloudTemplate}">
+        </ListView>
+    
+
+</ContentPage>
